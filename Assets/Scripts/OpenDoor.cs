@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class OpenDoor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+     void OnTriggerEnter(Collider other)
     {
-        
-    }
+        if (other.tag == "Player")
+        {
+            other.GetComponent<PlayerMove>().countDoor++;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            Destroy(gameObject);
+        }
     }
 }

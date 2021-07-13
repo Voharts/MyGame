@@ -11,10 +11,10 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jump
     cost: 2
-  - name: 
-    cost: 1
-  - name: 
-    cost: 1
+  - name: Sand
+    cost: 3
+  - name: CobbleStone
+    cost: 6
   - name: 
     cost: 1
   - name: 
