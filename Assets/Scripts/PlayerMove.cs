@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [SerializeField] private Animator _anim;
+    [SerializeField] private Rigidbody _rb;
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _speedRotation = 5f;
     private Vector3 _direction;
@@ -18,22 +20,43 @@ public class PlayerMove : MonoBehaviour
         _direction = Vector3.zero;
     }
 
-       
+
     void Update()
     {
         _direction.x = Input.GetAxis("Horizontal");
         _direction.z = Input.GetAxis("Vertical");
+        
+        if(Mathf.Approximately(_direction.magnitude, 0))
+        {
+            _anim.SetBool("IsWalk", false);
+        }
+        else 
+        {
+            _anim.SetBool("IsWalk", true);
+        }
 
         _angel = Input.GetAxis("Mouse X");
+
+
     }
 
-    private void FixedUpdate()
+
+    void FixedUpdate()
     {
-        var speed = _direction.normalized * _speed * Time.fixedDeltaTime;
-        transform.Translate(speed);
+        var speed = _direction.normalized * _speed * Time.deltaTime;
+        // transform.Translate(speed);
 
-        transform.Rotate(Vector3.up * _speedRotation * Input.GetAxis("Mouse X") * Time.fixedDeltaTime);
+        _rb.MovePosition(transform.position + speed);
+        //_rb.AddForce(speed, ForceMode.VelocityChange);
+
+        transform.Rotate(Vector3.up * _speedRotation * Input.GetAxis("Mouse X") * Time.deltaTime);
     }
+
+
+   /* public void CustomFUpdate()
+    {
+       
+    }*/
 
     private void OnCollisionEnter(Collision collision)
     {

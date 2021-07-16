@@ -5,66 +5,6 @@ using UnityEngine.Events;
 
 public class Turel : MonoBehaviour
 {
-    /*[SerializeField] private Transform _rotatePoint;
-    [SerializeField] private SphereCollider _visionCollider;
-    [SerializeField] private float _speedRotate;
-    [SerializeField] private float _distance;
-    [SerializeField] private float _angle;
-
-    private Transform _player;
-
-    [SerializeField] private GameObject _prefabBullet;
-    [SerializeField] private Transform _shootPoint;
-
-    public UnityEvent onEvent;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _visionCollider.radius = _distance;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (_player != null)
-        {
-            GameObject bullet = Instantiate(_prefabBullet, _shootPoint.position, _shootPoint.rotation);
-            bullet.transform.Translate(transform.forward * Time.deltaTime * 10f);
-            bullet.tag = "bullet";
-
-           //_rotatePoint.LookAt(_player);
-
-            Vector3 targetDir = _player.position - transform.position;
-            Vector3 newDir = Vector3.RotateTowards(transform.position, targetDir, Time.deltaTime * 100f, 0f);
-
-            transform.rotation = Quaternion.LookRotation(newDir);
-        }
-        else
-            _rotatePoint.Rotate(Vector3.up * Time.deltaTime * 50f);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            _player = other.transform;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            _player = null;
-        }
-    }
-
-   /* private void OnTriggerStay(Collider other)
-    {
-        
-    }*/
-
     [SerializeField] private SphereCollider _visionCollider;
     [SerializeField] private float _speedRotate;
     [SerializeField] private float _distance;
@@ -75,7 +15,7 @@ public class Turel : MonoBehaviour
     [SerializeField] private GameObject _prefabBullet;
     [SerializeField] private Transform _shootPoint;
 
-    
+    public UnityEvent onEvent;
 
     void Start()
     {
@@ -90,10 +30,9 @@ public class Turel : MonoBehaviour
     Vector3 targetDir;
     Vector3 newDir;
 
-
     public void Update()
     {
-        
+        onEvent?.Invoke();
 
         if (_player == null)
             return;
@@ -102,7 +41,14 @@ public class Turel : MonoBehaviour
 
         if (angle <= 10)
         {
+            RaycastHit hit;
             
+            if(Physics.Raycast(_shootPoint.position, _player.position, out hit))
+            {
+                Debug.DrawLine(_shootPoint.position, _player.position, Color.green, Time.deltaTime);
+                
+                if(hit.collider.gameObject.CompareTag("Player"))
+                {
                     targetDir = _player.position - transform.position;
                     newDir = Vector3.RotateTowards(transform.forward, targetDir, speed * Time.deltaTime, 0.0F);
 
@@ -120,8 +66,12 @@ public class Turel : MonoBehaviour
                         StartCoroutine(TimeShoot());
                         Destroy(go, 2);
                     }
-                      else
-                         Debug.DrawLine(_shootPoint.position, _player.position, Color.red, Time.deltaTime);
+                    
+                }
+            }
+            else
+                Debug.DrawLine(_shootPoint.position, _player.position, Color.red, Time.deltaTime);
+
         }
         else
         {
