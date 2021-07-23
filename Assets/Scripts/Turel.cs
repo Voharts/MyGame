@@ -42,12 +42,12 @@ public class Turel : MonoBehaviour
         if (angle <= 10)
         {
             RaycastHit hit;
-            
-            if(Physics.Raycast(_shootPoint.position, _player.position, out hit))
+
+            if (Physics.Raycast(_shootPoint.position, _player.position, out hit))
             {
                 Debug.DrawLine(_shootPoint.position, _player.position, Color.green, Time.deltaTime);
-                
-                if(hit.collider.gameObject.CompareTag("Player"))
+
+                if (hit.collider.gameObject.CompareTag("Player"))
                 {
                     targetDir = _player.position - transform.position;
                     newDir = Vector3.RotateTowards(transform.forward, targetDir, speed * Time.deltaTime, 0.0F);
@@ -66,12 +66,10 @@ public class Turel : MonoBehaviour
                         StartCoroutine(TimeShoot());
                         Destroy(go, 2);
                     }
-                    
                 }
             }
             else
                 Debug.DrawLine(_shootPoint.position, _player.position, Color.red, Time.deltaTime);
-
         }
         else
         {

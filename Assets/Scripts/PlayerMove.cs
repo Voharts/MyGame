@@ -37,7 +37,12 @@ public class PlayerMove : MonoBehaviour
 
         _angel = Input.GetAxis("Mouse X");
 
+        if(Input.GetMouseButtonDown(0))
+        {
+            _anim.SetTrigger("Attack");
+        }
 
+       
     }
 
 

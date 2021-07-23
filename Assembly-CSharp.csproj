@@ -59,14 +59,15 @@
     <Compile Include="Assets\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\TestLog.cs" />
     <Compile Include="Assets\Scripts\Bonus.cs" />
-    <Compile Include="Assets\AnimationEvent.cs" />
+    <Compile Include="Assets\Scripts\AnimationEvent.cs" />
     <Compile Include="Assets\Scripts\Pet.cs" />
+    <Compile Include="Assets\Scripts\FolloyCamera.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Turel.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\OpenDoor.cs" />
-    <Compile Include="Assets\Scripts\FolloyCamera.cs" />
+    <Compile Include="Assets\Scripts\Menu1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
